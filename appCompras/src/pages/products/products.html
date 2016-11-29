@@ -1,0 +1,22 @@
+<ion-header>
+	<ion-navbar color="primary">
+    	<ion-title>Produtos</ion-title>
+		<ion-buttons end>
+  			<button ion-button icon-only>
+    		<ion-icon name="cart"></ion-icon>
+  			</button>
+		</ion-buttons>
+  	</ion-navbar>
+</ion-header>
+<ion-content padding>
+	<ion-list>
+		<ion-item *ngFor="let item of items">
+			<ion-label>
+				<h2>{{item.title}}</h2>
+				<p>{{item.description}}</p>
+			</ion-label>
+			<h3 clear item-right color="primary">{{item.value}}</h3>
+			<ion-checkbox color="primary" checked="false"></ion-checkbox>
+		</ion-item>
+	</ion-list>
+</ion-content>
