@@ -8,10 +8,28 @@ import { NavController } from 'ionic-angular';
 
 export class ProductsPage {
 
-	products : Array<string>;
+	products : Array<{ name : string, description : string, checked : boolean}>;
 
 	constructor(public navCtrl: NavController) {
 
-		this.products = ['produto 1', 'produto 2', 'produto 3'];
+		this.products = [
+			{
+				name : 'Mouse Logitech',
+				description : 'Um mouse bom!',
+				checked : true
+			},
+			{
+				name : 'Notebook Dell',
+				description : 'Um notebook bom!',
+				checked : true
+			},
+			{
+				name : 'Macbook Air',
+				description : 'Um Macbook bom!',
+				checked : false
+			}
+		];
 	}
+
+
 }

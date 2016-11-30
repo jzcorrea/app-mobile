@@ -17,11 +17,11 @@
 	<ion-list>
 		<ion-item *ngFor="let product of products">
 			<ion-label>
-				<h2>{{product}}</h2>
-				<p>Teste</p>
+				<h2>{{product.name}}</h2>
+				<p>{{product.description}}</p>
 			</ion-label>
 			<h3 clear item-right color="primary">R$ 10,00</h3>
-			<ion-checkbox color="primary" checked="false"></ion-checkbox>
+			<ion-checkbox color="primary" checked={{product.checked}}></ion-checkbox>
 		</ion-item>
 	</ion-list>
 </ion-content>
