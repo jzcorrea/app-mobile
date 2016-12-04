@@ -1,7 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
+import { MyApp }        from './app.component';
 import { ProductsPage } from '../pages/products/products';
+import { ApiProvider }  from '../providers/api-provider';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,6 @@ import { ProductsPage } from '../pages/products/products';
     MyApp,
     ProductsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [ApiProvider, {provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
 export class AppModule {}

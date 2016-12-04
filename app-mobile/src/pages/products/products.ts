@@ -1,5 +1,6 @@
 import { Component } 	 from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { ApiProvider }   from '../../providers/api-provider';
 
 @Component({
 	selector 	: 'page-products',
@@ -8,28 +9,21 @@ import { NavController } from 'ionic-angular';
 
 export class ProductsPage {
 
-	products : Array<{ name : string, description : string, checked : boolean}>;
+	products : any[];
 
-	constructor(public navCtrl: NavController) {
+	count : number;
 
-		this.products = [
-			{
-				name : 'Mouse Logitech',
-				description : 'Um mouse bom!',
-				checked : true
-			},
-			{
-				name : 'Notebook Dell',
-				description : 'Um notebook bom!',
-				checked : true
-			},
-			{
-				name : 'Macbook Air',
-				description : 'Um Macbook bom!',
-				checked : false
-			}
-		];
+	constructor(public navCtrl: NavController, public api:ApiProvider) {
+
+		this.count = 0;
+		this.getProducts();
 	}
 
+	getProducts() {
 
+		this.api.getData().subscribe(
+			(products) => this.products = products,
+			(err) => console.error(err)
+		);
+	}
 }
