@@ -1,13 +1,13 @@
 <ion-header>
 	<ion-toolbar color="light">
-		<ion-buttons start>
+		<!-- <ion-buttons start>
 			<button ion-button icon-only color="royal">
 				<ion-icon name="add"></ion-icon>
 			</button>
-		</ion-buttons>
+		</ion-buttons> -->
 		<ion-title>Produtos</ion-title>
 		<ion-buttons end>
-			<button ion-button icon-only color="royal">
+			<button ion-button icon-only color="royal" [navPush]="cartPage">
 				<ion-icon name="cart"></ion-icon>
 				<ion-badge color="primary">{{ count }}</ion-badge>
 			</button>
@@ -15,14 +15,23 @@
 	</ion-toolbar>
 </ion-header>
 <ion-content padding>
+	<ion-card *ngIf="products.length == 0" padding>
+		<ion-card-header>
+			<ion-icon name="information-circle" color="primary"></ion-icon> Ooops!
+		</ion-card-header>
+		<ion-card-content>
+			Nenhum produto encontrado!
+		</ion-card-content>
+	</ion-card>
 	<ion-list>
+		<!-- Exibe a lista de produtos -->
 		<ion-item *ngFor="let product of products">
 			<ion-label>
 				<h2>{{product.name}}</h2>
 				<p>{{product.description}}</p>
 			</ion-label>
 			<h3 clear item-right color="primary">R$ {{product.value}}</h3>
-			<ion-checkbox color="primary" [(ngModel)]="product.checked"></ion-checkbox>
+			<ion-checkbox color="primary" [(ngModel)]="product.checked" (ngModelChange)="productSelected()"></ion-checkbox>
 		</ion-item>
 	</ion-list>
 </ion-content>

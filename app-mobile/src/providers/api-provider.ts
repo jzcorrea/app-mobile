@@ -2,17 +2,22 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-/*
-  	Provider para buscar os dados na API PHP
-*/
+/**
+ * Realiza conexões com a API
+ */
 @Injectable()
 export class ApiProvider {
 
+	// Endereço da API
 	apiURL : string = 'http://localhost/app-mobile-api/';
 
   	constructor(public http: Http) {
   	}
 
+  	/**
+  	 * Realiza uma chamada GET à API para retornar os dados dos produtos cadastrados
+  	 * @return {Promise} Promise com a busca
+  	 */
   	getData() {
 
 		return this.http.get(this.apiURL + 'produtos.php').map((response) => response.json());
