@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 export class ApiProvider {
 
 	// Endereço da API
-	apiURL : string = 'http://localhost/app-mobile-api/';
+	apiURL : string = 'http://192.168.25.115:80/app-mobile-api/';
 
   	constructor(public http: Http) {
   	}

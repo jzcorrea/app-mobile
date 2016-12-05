@@ -1,10 +1,10 @@
 <ion-header>
 	<ion-toolbar color="light">
-		<!-- <ion-buttons start>
-			<button ion-button icon-only color="royal">
-				<ion-icon name="add"></ion-icon>
+		<ion-buttons start>
+			<button ion-button icon-only color="royal" (click)="refresh()">
+				<ion-icon name="refresh"></ion-icon>
 			</button>
-		</ion-buttons> -->
+		</ion-buttons>
 		<ion-title>Produtos</ion-title>
 		<ion-buttons end>
 			<button ion-button icon-only color="royal" [navPush]="cartPage">
@@ -30,7 +30,7 @@
 				<h2>{{product.name}}</h2>
 				<p>{{product.description}}</p>
 			</ion-label>
-			<h3 clear item-right color="primary">R$ {{product.value}}</h3>
+			<h3 clear item-right color="primary">R$ {{product.value | number:"1.2-2"}}</h3>
 			<ion-checkbox color="primary" [(ngModel)]="product.checked" (ngModelChange)="productSelected()"></ion-checkbox>
 		</ion-item>
 	</ion-list>

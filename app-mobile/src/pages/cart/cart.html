@@ -22,15 +22,21 @@
 			<ion-item>
 				<ion-label>
 					<h2>{{product.name}}</h2>
+					<h3 color="primary">R$ {{product.value | number:"1.2-2"}}</h3>
 				</ion-label>
-				<h3 clear item-right color="primary">R$ {{product.value}}</h3>
+				<button ion-button clear item-right round outline color="danger" (click)="removeProduct(product.id)">REMOVER</button>
 			</ion-item>
 			<ion-item-options side="right">
-      			<button ion-button color="danger">
+      			<button ion-button color="danger" (click)="removeProduct(product.id)">
       				<ion-icon name="close"></ion-icon>
-      				Remover
+      				REMOVER
       			</button>
     		</ion-item-options>
 		</ion-item-sliding>
 	</ion-list>
+	<ion-footer *ngIf="products.length > 0">
+		<ion-toolbar class="total-value-bar">
+			Valor Total: <span>R$ {{total | number:"1.2-2"}}</span>
+		</ion-toolbar>
+	</ion-footer>
 </ion-content>

@@ -1,8 +1,8 @@
-import { Component, OnInit } 		from '@angular/core';
-import { NavController } 	 		from 'ionic-angular';
-import { CartPage } 		 		from '../cart/cart';
-import { ApiProvider }   	 		from '../../providers/api-provider';
-import { SelectedProductsProvider } from '../../providers/selected-products-provider';
+import { Component, OnInit } 				from '@angular/core';
+import { NavController, LoadingController } from 'ionic-angular';
+import { CartPage } 		 				from '../cart/cart';
+import { ApiProvider }   	 				from '../../providers/api-provider';
+import { SelectedProductsProvider } 		from '../../providers/selected-products-provider';
 
 @Component({
 	templateUrl : 'products.html'
@@ -20,7 +20,7 @@ export class ProductsPage implements OnInit {
 
 	cartPage : any;
 
-	constructor(public navCtrl : NavController, public api:ApiProvider, public sp:SelectedProductsProvider) {
+	constructor(public navCtrl : NavController, public api : ApiProvider, public loadingCtrl : LoadingController, public sp : SelectedProductsProvider) {
 
 	}
 
@@ -32,14 +32,37 @@ export class ProductsPage implements OnInit {
 		this.getProducts();
 	}
 
+	// Quando a página for exibida, deve verificar os produtos já selecionados
+	ionViewWillEnter() {
+
+		this.matchSelected();	
+	}
+
 	// Chama o provider da API para obter os produtos a serem selecionados
-	getProducts() {
+	getProducts(match = false) {
+
+		let loading = this.loadingCtrl.create({ content : 'Carregando...' });
+		loading.present();
 
 		this.api.getData().subscribe(
 			// Função em caso de sucesso
-			(products) => this.products = products,
+			(products) => {
+
+				this.products = products;
+
+				if (match === true) {
+
+					this.matchSelected();
+				}
+
+				loading.dismiss();
+			},
 			// Função em caso de erro
-			(err) => console.error(err)
+			(err) => {
+
+				loading.dismiss();
+				console.error(err);
+			}
 		);
 	}
 
@@ -50,5 +73,24 @@ export class ProductsPage implements OnInit {
 		this.count 			  = this.selectedProducts.length;
 
 		this.sp.set(this.selectedProducts);
+	}
+
+	// Verifica quais produtos já estão selecionados e marca a propriedade checked
+	matchSelected() {
+
+		let selectedIds = this.sp.get().map((product) => product.id);
+
+		for(let i = 0; i < this.products.length; i++) {
+
+			this.products[i].checked = (selectedIds.indexOf(this.products[i].id) >= 0);
+		}
+
+		this.count = selectedIds.length;
+	}
+
+	// Atualiza a lista, buscando os itens da API
+	refresh() {
+
+		this.getProducts(true);
 	}
 }

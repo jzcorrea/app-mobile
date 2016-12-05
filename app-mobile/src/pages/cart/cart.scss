@@ -1,0 +1,14 @@
+page-cart {
+	
+	.total-value-bar {
+
+		text-align: center;
+		font-size: 1.3em;
+		font-weight: bold;
+
+		span {
+
+			color: color($colors, primary)
+		}
+	}
+}

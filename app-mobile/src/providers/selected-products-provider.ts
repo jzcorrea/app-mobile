@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class SelectedProductsProvider {
 
-	selectedProducts : any[];
+	selectedProducts : any[] = [];
 
   	constructor() {}
 
